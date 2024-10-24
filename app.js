@@ -1,16 +1,17 @@
-let express = require('express');
-const mongodbconnect = require('./src/helper/db.connect_database');
+const express = require("express");
+const cors = require("cors");
+let musicroutes = require("./src/router/getmusic");
+const bodyParser = require("body-parser");
 
-let app = express(); 
+const app = express();
+const port = process.env.PORT || 5100;
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use("/api", musicroutes);
 
-app.get('/', (req, res) => {
-    res.send('i am running');
-});
-
-
-mongodbconnect()
-
-app.listen(8000, () => {
-    console.log('Server is running on http://localhost:3000');
+// Start server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
