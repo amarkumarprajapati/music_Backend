@@ -6,6 +6,10 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 5100;
 
+app.get("/", (req, res) => {
+  res.send("i am running");
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
